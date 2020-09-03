@@ -2,15 +2,17 @@
 
 require 'csv'
 
+task default: %i[cleanup_import_data create]
+
 desc 'Create And Fill Database'
-task :setup do
+task :create do
   `psql postgres -c 'DROP DATABASE IF EXISTS aircraft_db'`
   `psql postgres -c 'CREATE DATABASE aircraft_db'`
   `psql aircraft_db --file=tables.sql`
 end
 
 desc 'Cleanup import data'
-task :cleanup do
+task :cleanup_import_data do
   files = [
     'data/ACFTREF.txt',
     'data/ENGINE.txt',
