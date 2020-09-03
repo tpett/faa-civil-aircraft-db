@@ -16,6 +16,19 @@ COPY models
 FROM '/Users/travis/Source/personal/aircraft-db/data/ACFTREF.txt.fixed'
 DELIMITER ',' CSV HEADER;
 
+CREATE TABLE IF NOT EXISTS engines (
+  code varchar(255) PRIMARY KEY,
+  mfr varchar(255),
+  model varchar(255),
+  type varchar(255),
+  horsepower INT,
+  thrust INT
+);
+
+COPY engines
+FROM '/Users/travis/Source/personal/aircraft-db/data/ENGINE.txt.fixed'
+DELIMITER ',' CSV HEADER;
+
 CREATE TABLE IF NOT EXISTS aircraft (
   n_number VARCHAR(255) PRIMARY KEY,
   serial_number VARCHAR(255),
